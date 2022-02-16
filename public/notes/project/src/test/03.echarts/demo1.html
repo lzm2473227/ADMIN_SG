@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #charts {
+        width: 800;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 2. 准备具备宽高的容器 -->
+    <div id="charts"></div>
+    <!-- 1. 引入echarts -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.1.2/echarts.min.js"></script>
+    <script>
+      // 3. 获取这个容器
+      const charts = document.getElementById('charts')
+      // 4. 初始化echarts实例
+      const myEcharts = echarts.init(charts)
+      // 5. 设置option来生成图表
+      myEcharts.setOption({
+        // 标题
+        title: {
+          text: '柱状图',
+          subtext: '小标题'
+        },
+        // x轴
+        xAxis: {
+          // x轴的数据名称
+          data: ['食品', '视频', '数据', '箱包']
+        },
+        // y轴
+        yAxis: {
+          // show: true,
+          // 轴线
+          axisLine: {
+            // 显示
+            show: true
+          }
+        },
+        // 系列：指定数据和图表类型
+        series: {
+          // 图表的类型
+          type: 'bar', // 柱状图
+          // type: 'line', // 折线图
+          // type: 'pie', // 饼状图
+          // 数据
+          data: [30, 50, 20, 80]
+        },
+        // 颜色
+        color: ['pink', 'yellowgreen', 'deeppink', 'hotpink']
+      })
+    </script>
+  </body>
+</html>

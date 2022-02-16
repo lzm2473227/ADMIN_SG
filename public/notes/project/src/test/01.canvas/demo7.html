@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img id="img" src="./1.jpeg" alt="" />
+    <canvas id="charts"></canvas>
+    <script>
+      // 1. 获取canvas
+      const canvas = document.getElementById('charts')
+      const img = document.getElementById('img')
+      // 2. 获取画笔context
+      const ctx = canvas.getContext('2d')
+      // canvas的宽高
+      let width, height
+
+      img.onload = function() {
+        width = img.width * 2
+        height = img.height * 2
+        // 画图
+        drawImage(img)
+      }
+
+      function drawImage(img) {
+        canvas.width = width
+        canvas.height = height
+        ctx.drawImage(img, 0, 0, width, height)
+        // 打马赛克
+        // 原理：让矩形区域的颜色变成同一个颜色，这样图片就会模糊，呈现马赛克效果
+        const imageData = ctx.getImageData(0, 0, width, height)
+        // 4个值代表一个像素点的颜色（rgba）
+        // console.log(ctx)
+        const newImageData = ctx.createImageData(imageData)
+
+        // 定义矩阵大小 ? x ?
+        const size = 8
+
+        // 外层双重遍历，遍历的是像素点
+        for (let i = 0; i < height; i += size) {
+          // 高 行
+          for (let j = 0; j < width; j += size) {
+            // 宽 列
+            // 找到像素点，取出颜色
+            // 从 ? x ? 的矩阵随机挑一个像素点
+
+            // i 列  j 行
+            // 马赛克效果固定
+            // const position = i * width * 4 + j * 4
+
+            // 随机单一
+            // const random = Math.round(Math.random() * (size - 1))
+
+            // Math.random()调用两次，才会更加随机
+            const position =
+              (i + Math.round(Math.random() * (size - 1))) * width * 4 +
+              (j + Math.round(Math.random() * (size - 1))) * 4
+
+            // 颜色
+            const r = imageData.data[position]
+            const g = imageData.data[position + 1]
+            const b = imageData.data[position + 2]
+            const a = imageData.data[position + 3]
+
+            // 内部遍历，找到一个 ? x ? 的矩阵
+            for (let k = 0; k < size; k++) {
+              // 高 行
+              for (let l = 0; l < size; l++) {
+                // 宽 列
+                // 将 ? x ? 的矩阵 都变成一个颜色
+                const position = (i + k) * width * 4 + (j + l) * 4
+
+                newImageData.data[position] = r
+                newImageData.data[position + 1] = g
+                newImageData.data[position + 2] = b
+                newImageData.data[position + 3] = a
+              }
+            }
+          }
+        }
+
+        // 清空上一次
+        ctx.clearRect(0, 0, width, height)
+        // 将新图片绘制到canvas中
+        ctx.putImageData(newImageData, 0, 0)
+      }
+    </script>
+  </body>
+</html>

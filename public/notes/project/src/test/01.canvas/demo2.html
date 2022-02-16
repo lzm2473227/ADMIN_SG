@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="charts" width="800" height="400"></canvas>
+    <script>
+      // 1. 获取canvas
+      const canvas = document.getElementById('charts')
+      // 2. 获取画笔context
+      const ctx = canvas.getContext('2d')
+      // 3. 开始绘画
+      ctx.fillStyle = 'yellowgreen'
+      ctx.fillRect(100, 100, 200, 100)
+      ctx.strokeStyle = 'yellowgreen'
+      ctx.strokeRect(300, 300, 200, 100)
+    </script>
+  </body>
+</html>

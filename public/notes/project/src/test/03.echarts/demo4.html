@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #charts {
+        width: 800;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 2. 准备具备宽高的容器 -->
+    <div id="charts"></div>
+    <!-- 1. 引入echarts -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.1.2/echarts.min.js"></script>
+    <script>
+      // 3. 获取这个容器
+      const charts = document.getElementById('charts')
+      // 4. 初始化echarts实例
+      const myEcharts = echarts.init(charts)
+      // 5. 设置option来生成图表
+      const data = [
+        ['星期一', 30, 20, 'x', 45],
+        ['星期二', 40, 40, 'y', 22],
+        ['星期三', 55, 66, 'z', 33],
+        ['星期四', 35, 45],
+        ['星期五', 70, 35],
+        ['星期六', 44, 77],
+        ['星期天', 65, 55]
+      ]
+
+      myEcharts.setOption({
+        // 标题
+        title: {
+          text: '多个图表'
+        },
+        dataset: {
+          source: data
+        },
+        // x轴
+        xAxis: {
+          type: 'category'
+          // x轴的数据名称
+          // data: [
+          //   '星期一',
+          //   '星期二',
+          //   '星期三',
+          //   '星期四',
+          //   '星期五',
+          //   '星期六',
+          //   '星期天'
+          // ]
+        },
+        // y轴
+        yAxis: {
+          // show: true,
+          // 轴线
+          axisLine: {
+            // 显示
+            show: true
+          }
+        },
+        // 系列：指定数据和图表类型
+        series: [
+          {
+            // 图表的类型
+            type: 'bar', // 柱状图
+            // 指定用dataset哪些数据
+            encode: {
+              y: 2
+            }
+          },
+          {
+            // 图表的类型
+            type: 'line',
+            encode: {
+              y: 1
+            }
+          },
+          {
+            // 图表的类型
+            type: 'pie',
+            width: 150,
+            height: 150,
+            left: 'center',
+            top: 0,
+            label: {
+              overflow: 'break'
+            },
+            labelLine: {
+              lineStyle: {
+                color: 'red'
+              }
+            },
+            encode: {
+              // 名称
+              itemName: 3,
+              // 值
+              value: 4
+            }
+          }
+        ],
+        // 颜色
+        color: ['pink', 'yellowgreen', 'deeppink', 'hotpink']
+      })
+    </script>
+  </body>
+</html>

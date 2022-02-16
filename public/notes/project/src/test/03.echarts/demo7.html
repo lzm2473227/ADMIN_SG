@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #charts {
+        width: 800;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 2. 准备具备宽高的容器 -->
+    <div id="charts"></div>
+    <!-- 1. 引入echarts -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.1.2/echarts.min.js"></script>
+    <script>
+      // 3. 获取这个容器
+      const charts = document.getElementById('charts')
+      // 4. 初始化echarts实例
+      const myEcharts = echarts.init(charts)
+      // 5. 设置option来生成图表
+      myEcharts.setOption({
+        // 标题
+        title: {
+          text: '散点图'
+        },
+        // x轴
+        xAxis: {
+          type: 'category',
+          data: [
+            '星期一',
+            '星期二',
+            '星期三',
+            '星期四',
+            '星期五',
+            '星期六',
+            '星期天'
+          ]
+        },
+        // y轴
+        yAxis: [
+          {
+            // show: true,
+            // 轴线
+            axisLine: {
+              // 显示
+              show: true
+            }
+          },
+          {
+            // show: true,
+            // 轴线
+            axisLine: {
+              // 显示
+              show: true
+            }
+          }
+        ],
+        // 系列：指定数据和图表类型
+        series: [
+          {
+            type: 'bar',
+            data: [10, 20, 22, 11, 22, 25, 30],
+            yAxisIndex: 0 // 指定使用哪个y轴坐标
+          },
+          {
+            type: 'line',
+            data: [20, 30, 32, 21, 32, 45, 40],
+            yAxisIndex: 1 // 指定使用哪个y轴坐标
+          }
+        ],
+        tooltip: {}
+      })
+    </script>
+  </body>
+</html>
